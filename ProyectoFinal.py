@@ -463,8 +463,38 @@ def compara_valores(tabla_var, valor1, valor2, simbolo):
     elif(simbolo == "!="):
         return primero != segundo
 
-
-
+# ----------------------------------------------------------------------
+#
+# -----------------------------------------------------------------------
+def encontrar_rangos():
+    end_directo = False
+    rangos_func = []
+    indice_permitido = indice
+    datos = tokeniza(lineas[indice_permitido])
+    while (datos[0] != "else" and indice_permitido < len(lineas)):
+        if (datos[0] == "end"):
+            rangos_func.append(indice_permitido)
+            end_directo = True
+            break
+        indice_permitido += 1
+        if (indice_permitido < len(lineas)):
+            datos = tokeniza(lineas[indice_permitido])
+            if (len(datos) == 0):
+                indice_permitido += 1
+                if (indice_permitido < len(lineas)):
+                    datos = tokeniza(lineas[indice_permitido])
+    rangos_func.append(indice_permitido)
+    if not (end_directo):
+        while (datos[0] != "end" and indice_permitido < len(lineas)):
+            indice_permitido += 1
+            if (indice_permitido < len(lineas)):
+                datos = tokeniza(lineas[indice_permitido])
+                if (len(datos) == 0):
+                    indice_permitido += 1
+                    if (indice_permitido < len(lineas)):
+                        datos = tokeniza(lineas[indice_permitido])
+        rangos_func.append(indice_permitido)
+    return rangos_func
 # Aquí inicia el programa principal
 
 # variables importantes para el programa
@@ -492,7 +522,10 @@ while(indice < len(lineas)):
 
 
         if(len(rangos) > 1):
-            if(indice >= rangos[0] and indice <= rangos[1] ):
+            if(indice >= rangos[0] and indice <= rangos[1] and entro):
+                indice += 1
+                continue
+            elif(not(entro) and indice <= rangos[0] ):
                 indice += 1
                 continue
             if(indice > rangos[1]):
@@ -527,61 +560,46 @@ while(indice < len(lineas)):
 
                 entro = compara_valores(tabla_var, datos[1], datos[3], datos[2])
                 if(entro):
-                    indice_permitido = indice
-                    datos = tokeniza(lineas[indice_permitido])
-                    while(datos[0] != "else" and indice_permitido < len(lineas)):
-                        indice_permitido += 1
-                        if(indice_permitido < len(lineas)):
-                            datos = tokeniza(lineas[indice_permitido])
-                            if(len(datos) == 0):
-                                indice_permitido += 1
-                                if (indice_permitido < len(lineas)):
-                                    datos = tokeniza(lineas[indice_permitido])
 
-                    indice_permitido = indice_permitido
+                    rangos = encontrar_rangos()
 
-                    if(indice_permitido != len(lineas)):
-                        rangos.append(indice_permitido)
-                        encontre_else = True
-                    else:
-                        indice_permitido = indice
-                        datos = tokeniza(lineas[indice_permitido])
-
-
-                    while(datos[0] != "end"):
-                        indice_permitido += 1
-                        datos = tokeniza(lineas[indice_permitido])
-                    #print(indice_permitido)
-                    rangos.append(indice_permitido)
-                    indice += 1
-                    #print(rangos)
-                    continue
                 elif not(entro):
-                    indice_permitido = indice
-                    datos = tokeniza(lineas[indice_permitido])
-                    while (datos[0] != "else" and indice_permitido < len(lineas)):
-                        indice_permitido += 1
-                        if (indice_permitido < len(lineas)):
-                            datos = tokeniza(lineas[indice_permitido])
-                            if (len(datos) == 0):
-                                indice_permitido += 1
-                                if (indice_permitido < len(lineas)):
-                                    datos = tokeniza(lineas[indice_permitido])
-                    if (indice_permitido != len(lineas)):
-                            rangos.append(indice_permitido)
-                            print(rangos)
-                            encontre_else = True
-                    else:
-                        indice_permitido = indice
-                        datos = tokeniza(lineas[indice_permitido])
 
-                        while(datos[0] != "end" and indice_permitido < len(lineas)):
-                            indice_permitido += 1
-                            datos = tokeniza(lineas[indice_permitido])
-                        rangos.append(indice_permitido)
-                        indice += 1
-                    continue
+                    rangos = encontrar_rangos()
 
+            elif(datos[2] == "<"):
+
+                entro = compara_valores(tabla_var, datos[1], datos[3], datos[2])
+                if(entro):
+                    rangos = encontrar_rangos()
+
+                elif not(entro):
+                    rangos = encontrar_rangos()
+            elif(datos[2] == "=="):
+
+                entro = compara_valores(tabla_var, datos[1], datos[3], datos[2])
+                if (entro):
+                    rangos = encontrar_rangos()
+                elif not (entro):
+                    rangos = encontrar_rangos()
+            elif(datos[2] == "!="):
+                entro = compara_valores(tabla_var, datos[1], datos[3], datos[2])
+                if (entro):
+                    rangos = encontrar_rangos()
+                elif not (entro):
+                    rangos = encontrar_rangos()
+            elif(datos[2] == ">="):
+                entro = compara_valores(tabla_var, datos[1], datos[3], datos[2])
+                if (entro):
+                    rangos = encontrar_rangos()
+                elif not (entro):
+                    rangos = encontrar_rangos()
+            elif(datos[2] == "<="):
+                entro = compara_valores(tabla_var, datos[1], datos[3], datos[2])
+                if (entro):
+                    rangos = encontrar_rangos()
+                elif not (entro):
+                    rangos = encontrar_rangos()
 
 
 

@@ -4,12 +4,49 @@ if x > 24
     write ("Mayor")
 end
 
-x = 12
-if x > 24
-    write ("Mayor")
+x = 133
+if x < 24
+    write ("Menor")
+else
+    write ("Mayor o igual")
 end
 
-x = 155
-if x > 24
-    write ("Mayor")
+x = 133
+if x < 24
+    write ("Menor")
 end
+
+x = 13
+if x < 24
+    write ("Menor")
+else
+    write ("Mayor o igual")
+end
+
+x = 133
+if x < 24
+    write ("Menor")
+end
+
+x = 24
+if x == 24
+    write ("Igual")
+else
+    write ("Mayor o menor")
+end
+
+x = 24
+if x != 24
+    write ("Diferente")
+end
+
+x = 13
+if x >= 24
+    write ("Mayor o igual")
+end
+
+x = 534
+if x <= 24
+    write ("Menor o igual")
+end
+
