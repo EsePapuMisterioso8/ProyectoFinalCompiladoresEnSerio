@@ -1,0 +1,36 @@
+var a real
+var b integer
+read(a)
+read(b)
+var c string
+var d integer
+
+show_var \t
+b = cos(a)
+show_var \t
+d = (14+9+14*13*7)/6
+show_var \t
+var a real
+var f integer
+f = sin(a)
+show_var \t
+var g real
+g = log(a)
+show_var \t
+write(g)
+write("123dasfsd")
+write(45)  # este es de tipo variable
+var h real
+h = (3+(8*11)+(9/8)+15)+4
+show_var \t
+c = cos(a)
+show_var \t
+c = sin(a)
+show_var \t
+c = log(a)
+show_var \t
+read(c)
+show_var \t
+var i real
+i = 90
+show_var \t

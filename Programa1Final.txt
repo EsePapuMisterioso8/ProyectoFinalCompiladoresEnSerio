@@ -1,0 +1,15 @@
+var x integer
+x = 100
+if x > 24
+    write ("Mayor")
+end
+
+x = 12
+if x > 24
+    write ("Mayor")
+end
+
+x = 155
+if x > 24
+    write ("Mayor")
+end
